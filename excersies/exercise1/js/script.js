@@ -15,8 +15,8 @@ let squareX;
 let squareY;
 let squareSize = 100;
 
-let textX;
-let textY;
+let textX=0;
+let textY=640;
 let textSize=100;
 
 
@@ -43,8 +43,8 @@ function preload() {
 function setup() {
   // Create our canvas
   createCanvas(640,640);
-  textX=width+textSize/2;
-  textY=height+textSize/2;
+  // textX=width+textSize/2;
+  // textY=height+textSize/2;
 
   // Start the circle off screen to the bottom left
   // We divide the size by two because we're drawing from the center
@@ -92,8 +92,9 @@ function draw() {
   //add text to the screen
   let lowkey = "We need to stay lowkey";
   fill(0,0,0);
-  text(lowkey, width/2, height/2); //make text black
-
+  text(lowkey, textX, textY); //make text black
+  textX+=1;
+  textY-=1;
 
   //create rectangle for mouse
   fill(0)// make it black
