@@ -14,10 +14,14 @@ let circleSize = 100;
 let squareX;
 let squareY;
 let squareSize = 100;
-
+//current position and size of text
 let textX=0;
 let textY=640;
 let textSize=100;
+//to get current position of ellipse
+let ellipseX;
+let ellipseY;
+
 
 
 
@@ -43,9 +47,11 @@ function preload() {
 function setup() {
   // Create our canvas
   createCanvas(640,640);
+  //current position of ellipse
+  ellipseX = 0;
+  ellipseY = height/2;
   // textX=width+textSize/2;
   // textY=height+textSize/2;
-
   // Start the circle off screen to the bottom left
   // We divide the size by two because we're drawing from the center
   circleX = -circleSize/2;
@@ -55,6 +61,7 @@ function setup() {
   // We divide the size by two because we're drawing from the center
   squareX = width + squareSize/2;
   squareY = height + squareSize/2;
+
 
   // We'll draw rectangles from the center
   rectMode(CENTER);
@@ -71,8 +78,11 @@ function setup() {
 // Draw the circle and square on screen
 
 function draw() {
-  // We don't fill the background so we get a drawing effect
-
+//draw red ellipse to go across the canvas
+  fill(255,0,0,10);
+  ellipseX = ellipseX + 1;
+  ellipse(ellipseX,ellipseY,50,50);
+    // We don't fill the background so we get a drawing effect
   // Move circle up and to the right
   circleX += 1;
   circleY -= 1;
@@ -91,10 +101,13 @@ function draw() {
 
   //add text to the screen
   let lowkey = "We need to stay lowkey";
-  fill(0,0,0);
+  fill(0);
   text(lowkey, textX, textY); //make text black
   textX+=1;
   textY-=1;
+
+
+
 
   //create rectangle for mouse
   fill(0)// make it black
