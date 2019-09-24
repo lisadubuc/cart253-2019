@@ -54,8 +54,8 @@ function setup() {
 // Handle moving the avatar and enemy and checking for dodges and
 // game over situations.
 function draw() {
-  // A pink background
-  background(255,220,220);
+  // A yellow background
+  background(300,220,120);
 
   // Default the avatar's velocity to 0 in case no key is pressed this frame
   avatarVX = 0;
@@ -126,19 +126,21 @@ function draw() {
     // Reset the enemy's position to the left at a random height
     enemyX = 0;
     enemyY = random(0,height);
+  enemyVX=+1;
+
   }
 
   // Display the number of successful dodges in the console
   console.log(dodges);
 
-  // The player is black
-  fill(0);
-  // Draw the player as a circle
-  ellipse(avatarX,avatarY,avatarSize,avatarSize);
+  // The player is white
+  fill(300,300,300);
+  // Draw the player as a rectangle
+  rect(avatarX,avatarY,avatarSize,avatarSize);
 
   // The enemy is red
-  fill(255,0,0);
-  // Draw the enemy as a circle
+  fill(40,70,100);
+  // Draw the enemy as a dark blue
   ellipse(enemyX,enemyY,enemySize,enemySize);
 
 // display the number of dodges
