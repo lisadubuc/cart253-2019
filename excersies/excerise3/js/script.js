@@ -64,12 +64,14 @@ function setup() {
   createCanvas(windowWidth,windowHeight);
   background("#ffff00");
   imageMode(CENTER);
-
+  //add variable for the target to change size
+let imageSize=random(20,100);
   // Use a for loop to draw as many decoys as we need
   for (let i = 0; i < numDecoys; i++) {
     // Choose a random location on the canvas for this decoy
     let x = random(0,width);
     let y = random(0,height);
+
     // Generate a random number we can use for probability
     let r = random();
     // Use the random number to display one of the ten decoy
@@ -113,7 +115,7 @@ function setup() {
   targetY = random(0,height);
 
   // And draw it (because it's the last thing drawn, it will always be on top)
-  image(targetImage,targetX,targetY);
+  image(targetImage,targetX,targetY,imageSize,imageSize);
 }
 
 
