@@ -124,6 +124,10 @@ function draw() {
   fill(0);
   rect(width-100,0,100,100);
   image(targetImage,width-45,40,100,100);
+  //make fill white and add text
+  fill(255);
+  text("FIND ME!",width-90,90);
+  textSize(15);
   if (gameOver) {
     // Prepare our typography
     textFont("Helvetica");
