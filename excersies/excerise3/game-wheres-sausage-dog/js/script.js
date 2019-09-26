@@ -120,6 +120,10 @@ function setup() {
 // Displays the game over screen if the player has won,
 // otherwise nothing (all the gameplay stuff is in mousePressed())
 function draw() {
+//create rectangle with black fill and then put image of taget in the rectangle
+  fill(0);
+  rect(width-100,0,100,100);
+  image(targetImage,width-45,40,100,100);
   if (gameOver) {
     // Prepare our typography
     textFont("Helvetica");
