@@ -16,6 +16,8 @@ https://creativenerds.co.uk/freebies/80-free-wildlife-icons-the-best-ever-animal
 let targetX;
 let targetY;
 let targetImage;
+let targetspeed=5;
+let targetVX=5;
 
 // The ten decoy images
 let decoyImage1;
@@ -135,6 +137,13 @@ function draw() {
     textAlign(CENTER,CENTER);
     noStroke();
     fill(random(255));
+    //background goes black
+    background(0);
+    //make target move out of screen
+   targetVX=targetspeed;
+   targetX=targetX+targetVX;
+
+
 
     // Tell them they won!
     text("YOU WINNED!",width/2,height/2);
@@ -145,6 +154,7 @@ function draw() {
     stroke(random(255));
     strokeWeight(10);
     ellipse(targetX,targetY,targetImage.width,targetImage.height);
+    image(targetImage,targetX,targetY);
   }
 }
 
