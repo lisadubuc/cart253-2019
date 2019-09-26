@@ -29,6 +29,10 @@ let enemyVX = 5;
 // How many dodges the player has made
 let dodges = 0;
 
+let backgroundR=300;
+let backgroundG=220;
+let backgroundB=120;
+
 
 // setup()
 //
@@ -55,7 +59,7 @@ function setup() {
 // game over situations.
 function draw() {
   // A yellow background
-  background(300,220,120);
+  background(backgroundR,backgroundG,backgroundB);
 
   // Default the avatar's velocity to 0 in case no key is pressed this frame
   avatarVX = 0;
@@ -133,6 +137,11 @@ function draw() {
     enemySize=enemySize+10;
     enemySpeed=enemySpeed+1;
   }
+if (dodges>6) {
+backgroundR=random(0,255);
+backgroundG=random(0,255);
+backgroundB=random(0,255);
+}
 
   // Display the number of successful dodges in the console
   console.log(dodges);
