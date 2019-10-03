@@ -55,9 +55,23 @@ let preyEaten = 0;
 //add variable playerhealthspeed with original speed of health decreasing
 let playerhealthspeed=0.5;
 //add variables for backgrounds
-let backgroundR=100;
-let backgroundG=100;
-let backgroundB=200;
+let backgroundR=150;
+let backgroundG=50;
+let backgroundB=100;
+//add variable for sound
+let gameSound;
+
+let gameImage1;
+let gameImage2
+
+//add preload function
+function preload(){
+  //add in sound
+  gameSound=loadSound('assets/sounds/game.wav');
+  //add image for player
+  gameImage1=loadImage('assets/images/darkmoon.png');
+  gameImage2=loadImage('assets/images/yellowmoon.png');
+}
 // setup()
 //
 // Sets up the basic elements of the game
@@ -69,6 +83,7 @@ function setup() {
   // We're using simple functions to separate code out
   setupPrey();
   setupPlayer();
+  gameSound.play();
 }
 
 // setupPrey()
@@ -226,6 +241,8 @@ function checkEating() {
     preyHealth = constrain(preyHealth, 0, preyMaxHealth);
     //make the player bigger when the player eats the prey
     playerRadius=playerRadius+1;
+    //constrain the radius size
+    playerRadius=constrain(playerRadius,25,100)
 
     // Check if the prey died (health 0)
     if (preyHealth === 0) {
@@ -296,8 +313,11 @@ function movePrey() {
 //
 // Draw the prey as an ellipse with alpha based on health
 function drawPrey() {
-  fill(preyFill, preyHealth);
-  ellipse(preyX, preyY, preyRadius * 2);
+  //change prey for an image and make it CENTER
+  imageMode(CENTER);
+  // add tint so image is faded helps with camouflage
+  tint(255,preyHealth);
+  image(gameImage2,preyX,preyY,preyRadius*2,preyRadius*2);
 }
 
 // drawPlayer()
@@ -305,7 +325,11 @@ function drawPrey() {
 // Draw the player as an ellipse with alpha value based on health
 function drawPlayer() {
   fill(playerFill, playerHealth);
-  ellipse(playerX, playerY, playerRadius * 2);
+  //change player for an image and make it center
+  imageMode(CENTER);
+  // add tint so the image is full
+  tint(255,255);
+  image(gameImage1,playerX,playerY,playerRadius*2,playerRadius*2);
 }
 
 // showGameOver()
