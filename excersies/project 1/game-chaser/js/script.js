@@ -25,7 +25,7 @@ let playerRadius = 25;
 let playerVX = 0;
 let playerVY = 0;
 //make the speed of player faster
-let playerMaxSpeed = 5;
+let playerMaxSpeed = 3;
 // Player health
 let playerHealth;
 let playerMaxHealth = 255;
@@ -38,7 +38,8 @@ let preyY;
 let preyRadius = 25;
 let preyVX;
 let preyVY;
-let preyMaxSpeed = 4;
+//change prey speed
+let preyMaxSpeed = 8;
 // Prey health
 let preyHealth;
 let preyMaxHealth = 100;
@@ -219,6 +220,8 @@ function checkEating() {
     preyHealth = preyHealth - eatHealth;
     // Constrain to the possible range
     preyHealth = constrain(preyHealth, 0, preyMaxHealth);
+    //make the player bigger when the player eats the prey
+    playerRadius=playerRadius+1;
 
     // Check if the prey died (health 0)
     if (preyHealth === 0) {
@@ -259,17 +262,22 @@ function movePrey() {
   preyY = preyY + preyVY;
 
   // Screen wrapping
+  // change the prey size to smaller when they are about to avoid the player
   if (preyX < 0) {
+    preyRadius=preyRadius-0.5;
     preyX = preyX + width;
   }
   else if (preyX > width) {
+    preyRadius=preyRadius-0.5;
     preyX = preyX - width;
   }
 
   if (preyY < 0) {
+    preyRadius=preyRadius-0.5;
     preyY = preyY + height;
   }
   else if (preyY > height) {
+    preyRadius=preyRadius-0.5;
     preyY = preyY - height;
   }
 }
