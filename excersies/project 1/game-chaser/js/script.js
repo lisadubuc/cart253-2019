@@ -54,7 +54,10 @@ let eatHealth = 10;
 let preyEaten = 0;
 //add variable playerhealthspeed with original speed of health decreasing
 let playerhealthspeed=0.5;
-
+//add variables for backgrounds
+let backgroundR=100;
+let backgroundG=100;
+let backgroundB=200;
 // setup()
 //
 // Sets up the basic elements of the game
@@ -96,7 +99,8 @@ function setupPlayer() {
 // displays the two agents.
 // When the game is over, shows the game over screen.
 function draw() {
-  background(100, 100, 200);
+  //add backgrounf with variable
+  background(backgroundR,backgroundG,backgroundB);
 
   if (!gameOver) {
     handleInput();
@@ -232,6 +236,12 @@ function checkEating() {
       preyHealth = preyMaxHealth;
       // Track how many prey were eaten
       preyEaten = preyEaten + 1;
+      //add change of background when prey is eaten
+      if (preyEaten>1) {
+  backgroundR=random(0,255);
+  backgroundG=random(0,255);
+  backgroundB=random(0,255);
+}
     }
   }
 }
