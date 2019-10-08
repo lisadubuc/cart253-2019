@@ -3,12 +3,13 @@
 /******************************************************
 
 Game - Chaser
-Pippin Barr
+Lisa Dubuc
 
-A "simple" game of cat and mouse. The player is a circle and can move with keys,
-if they overlap the (randomly moving) prey they "eat it" by sucking out its life
-and adding it to their own. The player "dies" slowly over time so they have to keep
-eating to stay alive.
+This is a hunting game where the player "the dark moon" is chasing it's prey "the light moon".
+when the player overlaps the prey, the player has caught/eaten the prey making the prey smaller
+and the player bigger. it will also change the color of the screen sometimes helping the prey to
+cammoufage or help the player see the prey. if the player is not fast enough he will die since he
+needs to prey to stay alive.
 
 Includes: Physics-based movement, keyboard controls, health/stamina,
 random movement, screen wrap.
@@ -46,18 +47,18 @@ let preyMaxHealth = 100;
 // Prey fill color
 let preyFill = 200;
 //add variable preynoise
-let preynoise= 0;
+let preynoise = 0;
 
 // Amount of health obtained per frame of "eating" (overlapping) the prey
 let eatHealth = 10;
 // Number of prey eaten during the game (the "score")
 let preyEaten = 0;
 //add variable playerhealthspeed with original speed of health decreasing
-let playerhealthspeed=0.5;
+let playerhealthspeed = 0.5;
 //add variables for backgrounds
-let backgroundR=150;
-let backgroundG=50;
-let backgroundB=100;
+let backgroundR = 255;
+let backgroundG = 255;
+let backgroundB = 255;
 //add variable for sound
 let gameSound;
 
@@ -65,12 +66,12 @@ let gameImage1;
 let gameImage2
 
 //add preload function
-function preload(){
+function preload() {
   //add in sound
-  gameSound=loadSound('assets/sounds/game.wav');
+  gameSound = loadSound('assets/sounds/game.wav');
   //add image for player
-  gameImage1=loadImage('assets/images/darkmoon.png');
-  gameImage2=loadImage('assets/images/yellowmoon.png');
+  gameImage1 = loadImage('assets/images/darkmoon.png');
+  gameImage2 = loadImage('assets/images/yellowmoon.png');
 }
 // setup()
 //
@@ -115,7 +116,7 @@ function setupPlayer() {
 // When the game is over, shows the game over screen.
 function draw() {
   //add backgrounf with variable
-  background(backgroundR,backgroundG,backgroundB);
+  background(backgroundR, backgroundG, backgroundB);
 
   if (!gameOver) {
     handleInput();
@@ -128,8 +129,7 @@ function draw() {
 
     drawPrey();
     drawPlayer();
-  }
-  else {
+  } else {
     showGameOver();
   }
 }
@@ -141,39 +141,32 @@ function handleInput() {
   // Check for horizontal movement
   if (keyIsDown(LEFT_ARROW)) {
     playerVX = -playerMaxSpeed;
-  }
-  else if (keyIsDown(RIGHT_ARROW)) {
+  } else if (keyIsDown(RIGHT_ARROW)) {
     playerVX = playerMaxSpeed;
-  }
-  else {
+  } else {
     playerVX = 0;
   }
 
   // Check for vertical movement
   if (keyIsDown(UP_ARROW)) {
     playerVY = -playerMaxSpeed;
-  }
-  else if (keyIsDown(DOWN_ARROW)) {
+  } else if (keyIsDown(DOWN_ARROW)) {
     playerVY = playerMaxSpeed;
-  }
-  else if (keyIsDown(SHIFT)){
-//add the speed of the health decreasing faster when press shift
-  playerhealthspeed=playerhealthspeed+0.05;
-//add that the player has more speed when pressed shift
-    if(playerVX<0){
-      playerVX =playerVX-1;
+  } else if (keyIsDown(SHIFT)) {
+    //add the speed of the health decreasing faster when press shift
+    playerhealthspeed = playerhealthspeed + 0.05;
+    //add that the player has more speed when pressed shift
+    if (playerVX < 0) {
+      playerVX = playerVX - 1;
+    } else if (playerVX > 0) {
+      playerVX = playerVX + 1;
     }
-    else if(playerVX>0){
-      playerVX =playerVX+1;
+    if (playerVY < 0) {
+      playerVY = playerVY - 1;
+    } else if (playerVY > 0) {
+      playerVY = playerVY + 1;
     }
-    if(playerVY<0){
-      playerVY=playerVY-1;
-    }
-    else if(playerVY>0){
-      playerVY =playerVY+1;
-    }
-  }
-  else {
+  } else {
     playerVY = 0;
   }
 }
@@ -191,8 +184,7 @@ function movePlayer() {
   if (playerX < 0) {
     // Off the left side, so add the width to reset to the right
     playerX = playerX + width;
-  }
-  else if (playerX > width) {
+  } else if (playerX > width) {
     // Off the right side, so subtract the width to reset to the left
     playerX = playerX - width;
   }
@@ -200,8 +192,7 @@ function movePlayer() {
   if (playerY < 0) {
     // Off the top, so add the height to reset to the bottom
     playerY = playerY + height;
-  }
-  else if (playerY > height) {
+  } else if (playerY > height) {
     // Off the bottom, so subtract the height to reset to the top
     playerY = playerY - height;
   }
@@ -240,9 +231,9 @@ function checkEating() {
     // Constrain to the possible range
     preyHealth = constrain(preyHealth, 0, preyMaxHealth);
     //make the player bigger when the player eats the prey
-    playerRadius=playerRadius+1;
+    playerRadius = playerRadius + 1;
     //constrain the radius size
-    playerRadius=constrain(playerRadius,25,100)
+    playerRadius = constrain(playerRadius, 25, 100)
 
     // Check if the prey died (health 0)
     if (preyHealth === 0) {
@@ -254,11 +245,11 @@ function checkEating() {
       // Track how many prey were eaten
       preyEaten = preyEaten + 1;
       //add change of background when prey is eaten
-      if (preyEaten>1) {
-  backgroundR=random(0,255);
-  backgroundG=random(0,255);
-  backgroundB=random(0,255);
-}
+      if (preyEaten > 1) {
+        backgroundR = random(0, 255);
+        backgroundG = random(0, 255);
+        backgroundB = random(0, 255);
+      }
     }
   }
 }
@@ -278,9 +269,9 @@ function movePrey() {
     // to the appropriate range of velocities for the prey
     // change for noise and add a variation to preynoise
     preyVX = map(noise(preynoise), 0, 1, -preyMaxSpeed, preyMaxSpeed);
-    preynoise+=.4;
-   preyVY = map(noise(preynoise), 0, 1, -preyMaxSpeed, preyMaxSpeed);
-    preynoise+=.4;
+    preynoise += .4;
+    preyVY = map(noise(preynoise), 0, 1, -preyMaxSpeed, preyMaxSpeed);
+    preynoise += .4;
 
   }
 
@@ -291,20 +282,18 @@ function movePrey() {
   // Screen wrapping
   // change the prey size to smaller when they are about to avoid the player
   if (preyX < 0) {
-    preyRadius=preyRadius-0.5;
+    preyRadius = preyRadius - 0.5;
     preyX = preyX + width;
-  }
-  else if (preyX > width) {
-    preyRadius=preyRadius-0.5;
+  } else if (preyX > width) {
+    preyRadius = preyRadius - 0.5;
     preyX = preyX - width;
   }
 
   if (preyY < 0) {
-    preyRadius=preyRadius-0.5;
+    preyRadius = preyRadius - 0.5;
     preyY = preyY + height;
-  }
-  else if (preyY > height) {
-    preyRadius=preyRadius-0.5;
+  } else if (preyY > height) {
+    preyRadius = preyRadius - 0.5;
     preyY = preyY - height;
   }
 }
@@ -316,8 +305,8 @@ function drawPrey() {
   //change prey for an image and make it CENTER
   imageMode(CENTER);
   // add tint so image is faded helps with camouflage
-  tint(255,preyHealth);
-  image(gameImage2,preyX,preyY,preyRadius*2,preyRadius*2);
+  tint(255, preyHealth);
+  image(gameImage2, preyX, preyY, preyRadius * 2, preyRadius * 2);
 }
 
 // drawPlayer()
@@ -328,8 +317,8 @@ function drawPlayer() {
   //change player for an image and make it center
   imageMode(CENTER);
   // add tint so the image is full
-  tint(255,255);
-  image(gameImage1,playerX,playerY,playerRadius*2,playerRadius*2);
+  tint(255, 255);
+  image(gameImage1, playerX, playerY, playerRadius * 2, playerRadius * 2);
 }
 
 // showGameOver()
