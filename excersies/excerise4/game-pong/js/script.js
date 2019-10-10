@@ -3,8 +3,8 @@
 // Pong
 // by Lisa Dubuc
 //
-// A "simple" implementation of Pong with no scoring system
-// just the ability to play the game with the keyboard.
+// funny game of pong where you hit a baby if paddles and pass it to your
+//friend, the baby does not mind it finds it funny hear him laugh
 //
 // Up and down keys control the right hand paddle, W and S keys control
 // the left hand paddle
@@ -18,6 +18,8 @@ let fgColor = 255;
 // create variables for each paddle to have their own set of points
 let pointsLeft=0;
 let pointsRight=0;
+//add gameover variable
+let gameOver=false;
 
 
 // BALL
@@ -78,7 +80,7 @@ let gameImage
 //load image and sound
   function preload() {
   //add in sound
-  gameSound = loadSound('assets/sounds/A-tone.mp3');
+  gameSound = loadSound('assets/sounds/babylaugh.mp3');
   //add image for ball
   gameImage = loadImage('assets/images/baby.png');
 
@@ -119,11 +121,22 @@ function setupPaddles() {
 // Calls the appropriate functions to run the game
 // See how tidy it looks?!
 function draw() {
-  // Fill the background
+//add gameover in draw
+//change background color and add text when game over
+ if (gameOver==true){
+   background(200,20,20);
+   fill(0);
+   textAlign(CENTER, CENTER);
+   textSize(32);
+   text("Game Over! You Have Reached 15 Points!", width / 2, height / 2);
+   image(gameImage,ball.x, ball.y, ball.size, ball.size);
+   ball.size = ball.size+1;
+   ball.y=ball.y-1;
+ }
+else{
+  //fill background
   background(bgColor);
-
-
-
+  checkGameOver();
   if (playing) {
     // If the game is in play, we handle input and move the elements around
     handleInput(leftPaddle);
@@ -156,6 +169,7 @@ function draw() {
   displayPaddle(leftPaddle);
   displayPaddle(rightPaddle);
   displayBall();
+}
 }
 
 // handleInput()
@@ -204,6 +218,7 @@ function updateBall() {
 function ballIsOutOfBounds() {
 //create if statement and else if statement to make each side have points
 //add in paddle colors by adding a varible and setting the colors at random when a point is made for both.
+//add speed difference to each if for the winner to get the ball when reset.
   if (ball.x  < 0){
     pointsRight=pointsRight+1;
     rightPaddle.paddleColor = color(random(0,255),random(0,255),random(0,255));
@@ -299,7 +314,6 @@ function resetBall() {
   // Initialise the ball's position and velocity
   ball.x = width / 2;
   ball.y = height / 2;
-
   ball.vx = ball.speedX;
   ball.vy = ball.speedY;
 }
@@ -321,4 +335,12 @@ function displayStartMessage() {
 // Which will help us be allowed to play audio in the browser
 function mousePressed() {
   playing = true;
+}
+//add checkgameover function
+function checkGameOver(){
+  if(pointsLeft>=15||pointsRight>=15){
+    gameOver=true;
+    ball.y = height;
+    console.log("game over");
+  }
 }
