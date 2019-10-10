@@ -24,19 +24,22 @@ let pointsRight=0;
 
 // A ball object with the properties of
 // position, size, velocity, and speed
+//change ball size
 let ball = {
   x: 0,
   y: 0,
-  size: 20,
+  size: 30,
   vx: 0,
   vy: 0,
-  speed: 5
+  speedX: 5,
+  speedY:5
 }
 
 // PADDLES
 
 // Basic definition of a left paddle object with its key properties of
 // position, size, velocity, and speed
+//add paddle color varible with set fill
 let leftPaddle = {
   x: 0,
   y: 0,
@@ -53,6 +56,7 @@ let leftPaddle = {
 
 // Basic definition of a left paddle object with its key properties of
 // position, size, velocity, and speed
+//add paddle color varible with set fill
 let rightPaddle = {
   x: 0,
   y: 0,
@@ -65,14 +69,20 @@ let rightPaddle = {
   paddleColor:255
 }
 
-// A variable to hold the beep sound we will play on bouncing
-let beepSFX;
+//add varibles for sound and image
+let gameSound
+let gameImage
 
 // preload()
 //
-// Loads the beep audio for the sound of bouncing
-function preload() {
-  beepSFX = new Audio("assets/sounds/beep.wav");
+//load image and sound
+  function preload() {
+  //add in sound
+  gameSound = loadSound('assets/sounds/A-tone.mp3');
+  //add image for ball
+  gameImage = loadImage('assets/images/baby.png');
+
+
 }
 
 // setup()
@@ -193,10 +203,12 @@ function updateBall() {
 // Returns true if so, false otherwise
 function ballIsOutOfBounds() {
 //create if statement and else if statement to make each side have points
+//add in paddle colors by adding a varible and setting the colors at random when a point is made for both.
   if (ball.x  < 0){
     pointsRight=pointsRight+1;
     rightPaddle.paddleColor = color(random(0,255),random(0,255),random(0,255));
     console.log(pointsRight);
+    ball.speedX = 5;
     return true;
 
   }
@@ -204,6 +216,7 @@ function ballIsOutOfBounds() {
     pointsLeft=pointsLeft+1;
     console.log(pointsLeft);
     leftPaddle.paddleColor = color(random(0,255),random(0,255),random(0,255));
+    ball.speedX = -5;
     return true;
   }
   return false;
@@ -219,9 +232,9 @@ function checkBallWallCollision() {
   if (ball.y < 0 || ball.y > height) {
     // It hit so reverse velocity
     ball.vy = -ball.vy;
-    // Play our bouncing sound effect by rewinding and then playing
-    beepSFX.currentTime = 0;
-    beepSFX.play();
+    // change sound in game
+    gameSound.currentTime = 0;
+    gameSound.play();
   }
 }
 
@@ -250,9 +263,9 @@ function checkBallPaddleCollision(paddle) {
       // Then the ball is touching the paddle
       // Reverse its vx so it starts travelling in the opposite direction
       ball.vx = -ball.vx;
-      // Play our bouncing sound effect by rewinding and then playing
-      beepSFX.currentTime = 0;
-      beepSFX.play();
+      // change sound
+      gameSound.currentTime = 0;
+      gameSound.play();
     }
   }
 }
@@ -262,6 +275,7 @@ function checkBallPaddleCollision(paddle) {
 // Draws the specified paddle
 function displayPaddle(paddle) {
   // Draw the paddles
+  //add in fill
   fill(paddle.paddleColor);
   rect(paddle.x, paddle.y, paddle.w, paddle.h);
 }
@@ -271,8 +285,11 @@ function displayPaddle(paddle) {
 // Draws the ball on screen as a square
 function displayBall() {
   // Draw the ball
+  //add in fill
+  //make ball image
   fill(255);
-  rect(ball.x, ball.y, ball.size, ball.size);
+  imageMode(CENTER);
+  image(gameImage,ball.x, ball.y, ball.size, ball.size);
 }
 
 // resetBall()
@@ -282,8 +299,9 @@ function resetBall() {
   // Initialise the ball's position and velocity
   ball.x = width / 2;
   ball.y = height / 2;
-  ball.vx = ball.speed;
-  ball.vy = ball.speed;
+
+  ball.vx = ball.speedX;
+  ball.vy = ball.speedY;
 }
 
 // displayStartMessage()
