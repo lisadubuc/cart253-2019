@@ -45,7 +45,8 @@ let leftPaddle = {
   vy: 0,
   speed: 5,
   upKey: 87,
-  downKey: 83
+  downKey: 83,
+  paddleColor: 255
 }
 
 // RIGHT PADDLE
@@ -60,7 +61,8 @@ let rightPaddle = {
   vy: 0,
   speed: 5,
   upKey: 38,
-  downKey: 40
+  downKey: 40,
+  paddleColor:255
 }
 
 // A variable to hold the beep sound we will play on bouncing
@@ -139,6 +141,7 @@ function draw() {
     displayStartMessage();
   }
 
+
   // We always display the paddles and ball so it looks like Pong!
   displayPaddle(leftPaddle);
   displayPaddle(rightPaddle);
@@ -192,6 +195,7 @@ function ballIsOutOfBounds() {
 //create if statement and else if statement to make each side have points
   if (ball.x  < 0){
     pointsRight=pointsRight+1;
+    rightPaddle.paddleColor = color(random(0,255),random(0,255),random(0,255));
     console.log(pointsRight);
     return true;
 
@@ -199,6 +203,7 @@ function ballIsOutOfBounds() {
   else if (ball.x > width){
     pointsLeft=pointsLeft+1;
     console.log(pointsLeft);
+    leftPaddle.paddleColor = color(random(0,255),random(0,255),random(0,255));
     return true;
   }
   return false;
@@ -257,6 +262,7 @@ function checkBallPaddleCollision(paddle) {
 // Draws the specified paddle
 function displayPaddle(paddle) {
   // Draw the paddles
+  fill(paddle.paddleColor);
   rect(paddle.x, paddle.y, paddle.w, paddle.h);
 }
 
@@ -265,6 +271,7 @@ function displayPaddle(paddle) {
 // Draws the ball on screen as a square
 function displayBall() {
   // Draw the ball
+  fill(255);
   rect(ball.x, ball.y, ball.size, ball.size);
 }
 
