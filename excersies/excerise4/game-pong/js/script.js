@@ -16,10 +16,10 @@ let playing = false;
 let bgColor = 0;
 let fgColor = 255;
 // create variables for each paddle to have their own set of points
-let pointsLeft=0;
-let pointsRight=0;
+let pointsLeft = 0;
+let pointsRight = 0;
 //add gameover variable
-let gameOver=false;
+let gameOver = false;
 
 
 // BALL
@@ -34,7 +34,7 @@ let ball = {
   vx: 0,
   vy: 0,
   speedX: 5,
-  speedY:5
+  speedY: 5
 }
 
 // PADDLES
@@ -68,7 +68,7 @@ let rightPaddle = {
   speed: 5,
   upKey: 38,
   downKey: 40,
-  paddleColor:255
+  paddleColor: 255
 }
 
 //add varibles for sound and image
@@ -78,7 +78,7 @@ let gameImage
 // preload()
 //
 //load image and sound
-  function preload() {
+function preload() {
   //add in sound
   gameSound = loadSound('assets/sounds/babylaugh.mp3');
   //add image for ball
@@ -121,55 +121,53 @@ function setupPaddles() {
 // Calls the appropriate functions to run the game
 // See how tidy it looks?!
 function draw() {
-//add gameover in draw
-//change background color and add text when game over
- if (gameOver==true){
-   background(200,20,20);
-   fill(0);
-   textAlign(CENTER, CENTER);
-   textSize(32);
-   text("Game Over! You Have Reached 15 Points!", width / 2, height / 2);
-   image(gameImage,ball.x, ball.y, ball.size, ball.size);
-   ball.size = ball.size+1;
-   ball.y=ball.y-1;
- }
-else{
-  //fill background
-  background(bgColor);
-  checkGameOver();
-  if (playing) {
-    // If the game is in play, we handle input and move the elements around
-    handleInput(leftPaddle);
-    handleInput(rightPaddle);
-    updatePaddle(leftPaddle);
-    updatePaddle(rightPaddle);
-    updateBall();
+  //add gameover in draw
+  //change background color and add text when game over
+  if (gameOver == true) {
+    background(200, 20, 20);
+    fill(0);
+    textAlign(CENTER, CENTER);
+    textSize(32);
+    text("Game Over! You Have Reached 15 Points!", width / 2, height / 2);
+    image(gameImage, ball.x, ball.y, ball.size, ball.size);
+    ball.size = ball.size + 1;
+    ball.y = ball.y - 1;
+  } else {
+    //fill background
+    background(bgColor);
+    checkGameOver();
+    if (playing) {
+      // If the game is in play, we handle input and move the elements around
+      handleInput(leftPaddle);
+      handleInput(rightPaddle);
+      updatePaddle(leftPaddle);
+      updatePaddle(rightPaddle);
+      updateBall();
 
-    checkBallWallCollision();
-    checkBallPaddleCollision(leftPaddle);
-    checkBallPaddleCollision(rightPaddle);
+      checkBallWallCollision();
+      checkBallPaddleCollision(leftPaddle);
+      checkBallPaddleCollision(rightPaddle);
 
-    // Check if the ball went out of bounds and respond if so
-    // (Note how we can use a function that returns a truth value
-    // inside a conditional!)
-    if (ballIsOutOfBounds()) {
-      // If it went off either side, reset it
-      resetBall();
-      // This is where we would likely count points, depending on which side
-      // the ball went off...
+      // Check if the ball went out of bounds and respond if so
+      // (Note how we can use a function that returns a truth value
+      // inside a conditional!)
+      if (ballIsOutOfBounds()) {
+        // If it went off either side, reset it
+        resetBall();
+        // This is where we would likely count points, depending on which side
+        // the ball went off...
+      }
+    } else {
+      // Otherwise we display the message to start the game
+      displayStartMessage();
     }
-  }
-  else {
-    // Otherwise we display the message to start the game
-    displayStartMessage();
-  }
 
 
-  // We always display the paddles and ball so it looks like Pong!
-  displayPaddle(leftPaddle);
-  displayPaddle(rightPaddle);
-  displayBall();
-}
+    // We always display the paddles and ball so it looks like Pong!
+    displayPaddle(leftPaddle);
+    displayPaddle(rightPaddle);
+    displayBall();
+  }
 }
 
 // handleInput()
@@ -187,8 +185,7 @@ function handleInput(paddle) {
   else if (keyIsDown(paddle.downKey)) {
     // Move down
     paddle.vy = paddle.speed;
-  }
-  else {
+  } else {
     // Otherwise stop moving
     paddle.vy = 0;
   }
@@ -216,21 +213,20 @@ function updateBall() {
 // Checks if the ball has gone off the left or right
 // Returns true if so, false otherwise
 function ballIsOutOfBounds() {
-//create if statement and else if statement to make each side have points
-//add in paddle colors by adding a varible and setting the colors at random when a point is made for both.
-//add speed difference to each if for the winner to get the ball when reset.
-  if (ball.x  < 0){
-    pointsRight=pointsRight+1;
-    rightPaddle.paddleColor = color(random(0,255),random(0,255),random(0,255));
+  //create if statement and else if statement to make each side have points
+  //add in paddle colors by adding a varible and setting the colors at random when a point is made for both.
+  //add speed difference to each if for the winner to get the ball when reset.
+  if (ball.x < 0) {
+    pointsRight = pointsRight + 1;
+    rightPaddle.paddleColor = color(random(0, 255), random(0, 255), random(0, 255));
     console.log(pointsRight);
     ball.speedX = 5;
     return true;
 
-  }
-  else if (ball.x > width){
-    pointsLeft=pointsLeft+1;
+  } else if (ball.x > width) {
+    pointsLeft = pointsLeft + 1;
     console.log(pointsLeft);
-    leftPaddle.paddleColor = color(random(0,255),random(0,255),random(0,255));
+    leftPaddle.paddleColor = color(random(0, 255), random(0, 255), random(0, 255));
     ball.speedX = -5;
     return true;
   }
@@ -304,7 +300,7 @@ function displayBall() {
   //make ball image
   fill(255);
   imageMode(CENTER);
-  image(gameImage,ball.x, ball.y, ball.size, ball.size);
+  image(gameImage, ball.x, ball.y, ball.size, ball.size);
 }
 
 // resetBall()
@@ -337,9 +333,9 @@ function mousePressed() {
   playing = true;
 }
 //add checkgameover function
-function checkGameOver(){
-  if(pointsLeft>=15||pointsRight>=15){
-    gameOver=true;
+function checkGameOver() {
+  if (pointsLeft >= 15 || pointsRight >= 15) {
+    gameOver = true;
     ball.y = height;
     console.log("game over");
   }
