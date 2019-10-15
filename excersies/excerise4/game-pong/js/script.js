@@ -98,7 +98,7 @@ function setup() {
   rectMode(CENTER);
   noStroke();
   fill(fgColor);
-
+ bgColor=color(97, 223, 255);
   setupPaddles();
   resetBall();
 }
@@ -124,11 +124,11 @@ function draw() {
   //add gameover in draw
   //change background color and add text when game over
   if (gameOver == true) {
-    background(200, 20, 20);
+    background(255, 97, 110);
     fill(0);
     textAlign(CENTER, CENTER);
-    textSize(32);
-    text("Game Over! You Have Reached 15 Points!", width / 2, height / 2);
+    textSize(28);
+    text("Concussion!You have reached 15 successful hits!", width / 2, height / 2);
     image(gameImage, ball.x, ball.y, ball.size, ball.size);
     ball.size = ball.size + 1;
     ball.y = ball.y - 1;
