@@ -25,6 +25,9 @@ let bunnyImage;
 let beeImage;
 let safariImage;
 
+//add variable for socreboard
+let scoreBoard;
+
 //preload images
 function preload() {
   tigerImage = loadImage('assets/images/tiger.png');
@@ -51,6 +54,7 @@ function setup() {
   bunny = new Prey(100, 100, 10, color(255, 100, 10), 50,bunnyImage);
   chicken = new Prey(100, 100, 8, color(255, 255, 255), 60,chickenImage);
   bee = new Prey(100, 100, 20, color(255, 255, 0), 10, beeImage);
+  scoreBoard= new scoreboard(tiger.score, snake.score, wolf.score);
 }
 
 // draw()
@@ -93,4 +97,8 @@ function draw() {
   chicken.display();
   bunny.display();
   bee.display();
+
+ //put scoreboard in display
+  scoreBoard.updateScores(tiger.score, snake.score, wolf.score);
+  scoreBoard.display();
 }

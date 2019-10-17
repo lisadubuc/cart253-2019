@@ -24,7 +24,7 @@ class Predator {
     // Health properties
     this.maxHealth = radius;
     this.health = this.maxHealth; // Must be AFTER defining this.maxHealth
-    this.healthLossPerMove = 0.1;
+    this.healthLossPerMove = 0.08;
     this.healthGainPerEat = 1;
     // Display properties
     this.fillColor = fillColor;
@@ -36,6 +36,7 @@ class Predator {
     this.leftKey = leftKey;
     this.rightKey = rightKey;
     this.animalImage = animalImage;
+    this.score=0;
   }
 
   // handleInput
@@ -119,6 +120,8 @@ class Predator {
       prey.health -= this.healthGainPerEat;
       // Check if the prey died and reset it if so
       if (prey.health < 0) {
+        //add score when a prey is eaten
+        this.score +=1;
         prey.reset();
       }
     }
@@ -135,7 +138,6 @@ class Predator {
     fill(this.fillColor);
     this.radius = this.health;
     image(this.animalImage,this.x, this.y,this.radius,this.radius);
-  //  ellipse(this.x, this.y, this.radius * 2);
     pop();
   }
 }
