@@ -16,19 +16,41 @@ let chicken;
 let bunny;
 let bee;
 
+// add variables for images
+let tigerImage;
+let snakeImage;
+let wolfImage;
+let chickenImage;
+let bunnyImage;
+let beeImage;
+let safariImage;
+
+//preload images
+function preload() {
+  tigerImage = loadImage('assets/images/tiger.png');
+  snakeImage = loadImage('assets/images/snake.png');
+  wolfImage = loadImage('assets/images/wolf.png');
+  chickenImage = loadImage('assets/images/chick.png');
+  bunnyImage = loadImage('assets/images/bunny.png');
+  beeImage = loadImage('assets/images/bee.png');
+  safariImage = loadImage('assets/images/forest.jpg');
+}
+
+
 // setup()
 //
 // Sets up a canvas
 // Creates objects for the predator and three prey
 //give the two new predators code keys
+//add images in set up
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  tiger = new Predator(100, 100, 5, color(200, 200, 0), 40, UP_ARROW, DOWN_ARROW,LEFT_ARROW, RIGHT_ARROW);
-  snake= new Predator(100, 100,5, color(200,100,0), 40, 87,83,65,63);
-  wolf= new Predator(100,100,5, color(100,200,0), 40, 85,74,72,75);
-  bunny = new Prey(100, 100, 10, color(255, 100, 10), 50);
-  chicken = new Prey(100, 100, 8, color(255, 255, 255), 60);
-  bee = new Prey(100, 100, 20, color(255, 255, 0), 10);
+  tiger = new Predator(100, 100, 5, color(200, 200, 0), 40, UP_ARROW, DOWN_ARROW,LEFT_ARROW, RIGHT_ARROW,tigerImage);
+  snake= new Predator(100, 100,5, color(200,100,0), 40, 87,83,65,63, snakeImage);
+  wolf= new Predator(100,100,5, color(100,200,0), 40, 85,74,72,75, wolfImage);
+  bunny = new Prey(100, 100, 10, color(255, 100, 10), 50,bunnyImage);
+  chicken = new Prey(100, 100, 8, color(255, 255, 255), 60,chickenImage);
+  bee = new Prey(100, 100, 20, color(255, 255, 0), 10, beeImage);
 }
 
 // draw()
@@ -36,7 +58,7 @@ function setup() {
 // Handles input, movement, eating, and displaying for the system's objects
 function draw() {
   // Clear the background to black
-  background(0);
+  background(safariImage);
 
   // Handle input for the tiger
   // give the 2 new predators handle input

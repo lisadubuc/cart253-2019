@@ -6,12 +6,14 @@
 
 class Predator {
 
+
   // constructor
   //
   // Sets the initial values for the Predator's properties
   // Either sets default values or uses the arguments provided
   //add key codes in
-  constructor(x, y, speed, fillColor, radius,upKey,downKey,leftKey,rightKey) {
+  //add animal image
+  constructor(x, y, speed, fillColor, radius,upKey,downKey,leftKey,rightKey,animalImage) {
     // Position
     this.x = x;
     this.y = y;
@@ -33,6 +35,7 @@ class Predator {
     this.downKey = downKey;
     this.leftKey = leftKey;
     this.rightKey = rightKey;
+    this.animalImage = animalImage;
   }
 
   // handleInput
@@ -73,7 +76,7 @@ class Predator {
     this.y += this.vy;
     // Update health
     this.health = this.health - this.healthLossPerMove;
-    this.health = constrain(this.health, 0, this.maxHealth);
+    this.health = constrain(this.health, 1, this.maxHealth);
     // Handle wrapping
     this.handleWrapping();
   }
@@ -125,12 +128,14 @@ class Predator {
   //
   // Draw the predator as an ellipse on the canvas
   // with a radius the same size as its current health.
+  //put image in display
   display() {
     push();
     noStroke();
     fill(this.fillColor);
     this.radius = this.health;
-    ellipse(this.x, this.y, this.radius * 2);
+    image(this.animalImage,this.x, this.y,this.radius,this.radius);
+  //  ellipse(this.x, this.y, this.radius * 2);
     pop();
   }
 }
