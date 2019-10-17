@@ -1,9 +1,10 @@
 // Predator-Prey Simulation
-// by Pippin Barr
+// by Lisa Dubuc
 //
-// Creates a predator and three prey (of different sizes and speeds)
+//it is a predator and prey game where different animals are chasing others
+//the size and speed of the preys change
 // The predator chases the prey using the arrow keys and consumes them.
-// The predator loses health over time, so must keep eating to survive.
+// The predator loses health over time, so they must keep eating to survive.
 
 // Our predator
 //create 2 new predators
@@ -48,13 +49,13 @@ function preload() {
 //add images in set up
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  tiger = new Predator(100, 100, 5, color(200, 200, 0), 40, UP_ARROW, DOWN_ARROW,LEFT_ARROW, RIGHT_ARROW,tigerImage);
-  snake= new Predator(100, 100,5, color(200,100,0), 40, 87,83,65,63, snakeImage);
-  wolf= new Predator(100,100,5, color(100,200,0), 40, 85,74,72,75, wolfImage);
-  bunny = new Prey(100, 100, 10, color(255, 100, 10), 50,bunnyImage);
-  chicken = new Prey(100, 100, 8, color(255, 255, 255), 60,chickenImage);
+  tiger = new Predator(100, 100, 5, color(200, 200, 0), 40, UP_ARROW, DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, tigerImage);
+  snake = new Predator(100, 100, 5, color(200, 100, 0), 40, 87, 83, 65, 63, snakeImage);
+  wolf = new Predator(100, 100, 5, color(100, 200, 0), 40, 85, 74, 72, 75, wolfImage);
+  bunny = new Prey(100, 100, 10, color(255, 100, 10), 50, bunnyImage);
+  chicken = new Prey(100, 100, 8, color(255, 255, 255), 60, chickenImage);
   bee = new Prey(100, 100, 20, color(255, 255, 0), 10, beeImage);
-  scoreBoard= new scoreboard(tiger.score, snake.score, wolf.score);
+  scoreBoard = new scoreboard(tiger.score, snake.score, wolf.score);
 }
 
 // draw()
@@ -98,7 +99,7 @@ function draw() {
   bunny.display();
   bee.display();
 
- //put scoreboard in display
+  //put scoreboard in display
   scoreBoard.updateScores(tiger.score, snake.score, wolf.score);
   scoreBoard.display();
 }
