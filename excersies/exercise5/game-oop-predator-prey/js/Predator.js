@@ -13,7 +13,7 @@ class Predator {
   // Either sets default values or uses the arguments provided
   //add key codes in
   //add animal image
-  constructor(x, y, speed, fillColor, radius, upKey, downKey, leftKey, rightKey, animalImage) {
+  constructor(x, y, speed, fillColor, radius, upKey, downKey, leftKey, rightKey, animalImage, sprintKey) {
     // Position
     this.x = x;
     this.y = y;
@@ -21,6 +21,10 @@ class Predator {
     this.vx = 0;
     this.vy = 0;
     this.speed = speed;
+    //add variable for current speed
+    this.currentSpeed= speed;
+    //add variable for sprint speed
+    this.sprintSpeed= 2*speed;
     // Health properties
     this.maxHealth = radius;
     this.health = this.maxHealth; // Must be AFTER defining this.maxHealth
@@ -36,6 +40,7 @@ class Predator {
     this.leftKey = leftKey;
     this.rightKey = rightKey;
     this.animalImage = animalImage;
+    this.sprintKey= sprintKey;
     this.score = 0;
   }
 
@@ -44,19 +49,26 @@ class Predator {
   // Checks if an arrow key is pressed and sets the predator's
   // velocity appropriately.
   handleInput() {
+    //add function for the sprint key to work
+    if(keyIsDown(this.sprintKey)){
+      this.currentSpeed = this.sprintSpeed;
+    }
+    else{
+      this.currentSpeed = this.speed;
+    }
     // Horizontal movement
     if (keyIsDown(this.leftKey)) {
-      this.vx = -this.speed;
+      this.vx = -this.currentSpeed;
     } else if (keyIsDown(this.rightKey)) {
-      this.vx = this.speed;
+      this.vx = this.currentSpeed;
     } else {
       this.vx = 0;
     }
     // Vertical movement
     if (keyIsDown(this.upKey)) {
-      this.vy = -this.speed;
+      this.vy = -this.currentSpeed;
     } else if (keyIsDown(this.downKey)) {
-      this.vy = this.speed;
+      this.vy = this.currentSpeed;
     } else {
       this.vy = 0;
     }

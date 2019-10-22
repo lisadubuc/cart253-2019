@@ -24,8 +24,8 @@ class scoreboard {
     fill(0);
     textSize(40);
     text(this.scoreP1, 300, 40);
-    text(this.scoreP2, 500, 40);
-    text(this.scoreP3, 900, 40);
+    text(this.scoreP2, 400, 40);
+    text(this.scoreP3, 500, 40);
     pop();
   }
 
