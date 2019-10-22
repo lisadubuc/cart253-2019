@@ -50,9 +50,9 @@ function preload() {
 //add sprint to the set up and to all predators with individual keycodes
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  tiger = new Predator(100, 100, 5, color(200, 200, 0), 40, UP_ARROW, DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, tigerImage,SHIFT);
+  tiger = new Predator(100, 100, 5, color(200, 200, 0), 40, UP_ARROW, DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, tigerImage, SHIFT);
   snake = new Predator(100, 100, 5, color(200, 100, 0), 40, 87, 83, 65, 63, snakeImage, 32);
-  wolf = new Predator(100, 100, 5, color(100, 200, 0), 40, 85, 74, 72, 75, wolfImage,ENTER);
+  wolf = new Predator(100, 100, 5, color(100, 200, 0), 40, 85, 74, 72, 75, wolfImage, ENTER);
   bunny = new Prey(100, 100, 10, color(255, 100, 10), 50, bunnyImage);
   chicken = new Prey(100, 100, 8, color(255, 255, 255), 60, chickenImage);
   bee = new Prey(100, 100, 20, color(255, 255, 0), 10, beeImage);

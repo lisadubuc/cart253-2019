@@ -22,9 +22,9 @@ class Predator {
     this.vy = 0;
     this.speed = speed;
     //add variable for current speed
-    this.currentSpeed= speed;
+    this.currentSpeed = speed;
     //add variable for sprint speed
-    this.sprintSpeed= 2*speed;
+    this.sprintSpeed = 2 * speed;
     // Health properties
     this.maxHealth = radius;
     this.health = this.maxHealth; // Must be AFTER defining this.maxHealth
@@ -40,7 +40,7 @@ class Predator {
     this.leftKey = leftKey;
     this.rightKey = rightKey;
     this.animalImage = animalImage;
-    this.sprintKey= sprintKey;
+    this.sprintKey = sprintKey;
     this.score = 0;
   }
 
@@ -50,10 +50,9 @@ class Predator {
   // velocity appropriately.
   handleInput() {
     //add function for the sprint key to work
-    if(keyIsDown(this.sprintKey)){
+    if (keyIsDown(this.sprintKey)) {
       this.currentSpeed = this.sprintSpeed;
-    }
-    else{
+    } else {
       this.currentSpeed = this.speed;
     }
     // Horizontal movement
