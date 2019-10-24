@@ -30,20 +30,20 @@ let playGame;
 let buttonX;
 let buttonY;
 
-let gameOver
-
 //add variable for socreboard
 let scoreBoard;
 
 //preload images
 function preload() {
-  tigerImage = loadImage('assets/images/tiger.png');
-  snakeImage = loadImage('assets/images/snake.png');
-  wolfImage = loadImage('assets/images/wolf.png');
-  chickenImage = loadImage('assets/images/chick.png');
-  bunnyImage = loadImage('assets/images/bunny.png');
-  beeImage = loadImage('assets/images/bee.png');
-  safariImage = loadImage('assets/images/forest.jpg');
+  tigerImage = loadImage('assets/images/clown.png');
+  snakeImage = loadImage('assets/images/pumpkin.png');
+  wolfImage = loadImage('assets/images/ghost.png');
+  chickenImage = loadImage('assets/images/dance.png');
+  bunnyImage = loadImage('assets/images/guard.png');
+  beeImage = loadImage('assets/images/angel.png');
+  safariImage = loadImage('assets/images/haunted.jpg');
+  startImage=loadImage('assets/images/jack.png');
+  endImage=loadImage('assets/images/halloween.jpeg');
 }
 
 
@@ -67,7 +67,6 @@ function setup() {
   playGame="S";
   bottonX=width/2;
   bottonY=height/2;
-  //gameOver=false;
 }
 
 // draw()
@@ -117,23 +116,30 @@ function draw() {
   //put scoreboard in display
   scoreBoard.updateScores(tiger.score, snake.score, wolf.score);
   scoreBoard.display();
+  //display gameover
    checkGameOver();
 // create an else for the start page to apear
 }
 else  if (playGame ==="S"){
   push();
-  background(255);
+  background(startImage);
   rectMode(CENTER);
-  fill(100,200,150);
+  fill(148, 6, 6);
   rect(bottonX,bottonY,100,100);
   fill(0);
-  text("Start Game!", width/2-50, height/2);
+  text("Start Game!", width/2-50, height/2,);
   pop();
 }
+//add a gameover page
 else  if (playGame ==="E"){
-background(0);
-fill:(255);
-text("Gameover!", width/2,height/2);
+push();
+background(endImage);
+rectMode(CENTER);
+fill(148, 6, 6);
+rect(bottonX,bottonY,100,100);
+fill(0);
+text("Gameover!", width/2-50,height/2,);
+pop();
 }
 }
 //create mouse press function to have a botton to press to start
@@ -143,9 +149,8 @@ function mousePressed(){
     playGame="P";
   }
 }
-
+//make a checkgameover function to know when the game is over
   function checkGameOver() {
-  //if (pointsLeft >= 15 || pointsRight >= 15) {
   if(snake.health<=1||wolf.health<=1||tiger.health<=1){
     playGame="E";
     console.log("game over");
