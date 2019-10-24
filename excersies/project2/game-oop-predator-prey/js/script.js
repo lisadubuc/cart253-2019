@@ -33,6 +33,8 @@ let buttonY;
 //add variable for socreboard
 let scoreBoard;
 
+let startScreen;
+let endScreen;
 //preload images
 function preload() {
   tigerImage = loadImage('assets/images/clown.png');
@@ -56,6 +58,10 @@ function preload() {
 //add sprint to the set up and to all predators with individual keycodes
 function setup() {
   createCanvas(windowWidth, windowHeight);
+  //add set ups for the start page
+  playGame="S";
+  bottonX=width/2;
+  bottonY=height/2;
   tiger = new Predator(100, 100, 5, color(200, 200, 0), 40, UP_ARROW, DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, tigerImage, SHIFT);
   snake = new Predator(100, 100, 5, color(200, 100, 0), 40, 87, 83, 65, 63, snakeImage, 32);
   wolf = new Predator(100, 100, 5, color(100, 200, 0), 40, 85, 74, 72, 75, wolfImage, ENTER);
@@ -63,10 +69,9 @@ function setup() {
   chicken = new Prey(100, 100, 8, color(255, 255, 255), 60, chickenImage);
   bee = new Prey(100, 100, 20, color(255, 255, 0), 10, beeImage);
   scoreBoard = new scoreboard(tiger.score, snake.score, wolf.score);
-  //add set ups for the start page
-  playGame="S";
-  bottonX=width/2;
-  bottonY=height/2;
+  startScreen=new screens (startImage, bottonX, bottonY, 100, 100, color(148,6,6),"Start Game!");
+  endScreen=new screens (endImage, bottonX, bottonY, 100, 100, color(148,6,6),"Game Over!")
+
 }
 
 // draw()
@@ -121,25 +126,12 @@ function draw() {
 // create an else for the start page to apear
 }
 else  if (playGame ==="S"){
-  push();
-  background(startImage);
-  rectMode(CENTER);
-  fill(148, 6, 6);
-  rect(bottonX,bottonY,100,100);
-  fill(0);
-  text("Start Game!", width/2-50, height/2,);
-  pop();
+startScreen.display();
+
 }
 //add a gameover page
 else  if (playGame ==="E"){
-push();
-background(endImage);
-rectMode(CENTER);
-fill(148, 6, 6);
-rect(bottonX,bottonY,100,100);
-fill(0);
-text("Gameover!", width/2-50,height/2,);
-pop();
+endScreen.display();
 }
 }
 //create mouse press function to have a botton to press to start
