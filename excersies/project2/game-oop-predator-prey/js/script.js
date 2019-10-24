@@ -30,6 +30,8 @@ let playGame;
 let buttonX;
 let buttonY;
 
+let gameOver
+
 //add variable for socreboard
 let scoreBoard;
 
@@ -62,16 +64,17 @@ function setup() {
   bee = new Prey(100, 100, 20, color(255, 255, 0), 10, beeImage);
   scoreBoard = new scoreboard(tiger.score, snake.score, wolf.score);
   //add set ups for the start page
-  playGame=false;
+  playGame="S";
   bottonX=width/2;
   bottonY=height/2;
+  //gameOver=false;
 }
 
 // draw()
 //
 // Handles input, movement, eating, and displaying for the system's objects
 function draw() {
-  if (playGame===true){
+  if (playGame==="P"){
 
 
   // Clear the background to black
@@ -114,9 +117,10 @@ function draw() {
   //put scoreboard in display
   scoreBoard.updateScores(tiger.score, snake.score, wolf.score);
   scoreBoard.display();
+   checkGameOver();
 // create an else for the start page to apear
 }
-else {
+else  if (playGame ==="S"){
   push();
   background(255);
   rectMode(CENTER);
@@ -126,13 +130,24 @@ else {
   text("Start Game!", width/2-50, height/2);
   pop();
 }
+else  if (playGame ==="E"){
+background(0);
+fill:(255);
+text("Gameover!", width/2,height/2);
+}
 }
 //create mouse press function to have a botton to press to start
 function mousePressed(){
-  console.log("mouse pressed");
   let d = dist(mouseX, mouseY, bottonX, bottonY);
-  console.log(d);
   if(d<50){
-    playGame=true;
+    playGame="P";
+  }
+}
+
+  function checkGameOver() {
+  //if (pointsLeft >= 15 || pointsRight >= 15) {
+  if(snake.health<=1||wolf.health<=1||tiger.health<=1){
+    playGame="E";
+    console.log("game over");
   }
 }
