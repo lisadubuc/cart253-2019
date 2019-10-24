@@ -1,3 +1,4 @@
+//add class for screens (start and end)
 class screens {
 
 
@@ -13,6 +14,7 @@ class screens {
     this.screenText=screenText;
 
   }
+  //make the diplay
   display(){
     push();
     background(this.screenImage);

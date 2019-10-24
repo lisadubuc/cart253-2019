@@ -32,9 +32,11 @@ let buttonY;
 
 //add variable for socreboard
 let scoreBoard;
-
+//add start and end screen variables
 let startScreen;
 let endScreen;
+
+let gameSound;
 //preload images
 function preload() {
   tigerImage = loadImage('assets/images/clown.png');
@@ -46,6 +48,7 @@ function preload() {
   safariImage = loadImage('assets/images/haunted.jpg');
   startImage=loadImage('assets/images/jack.png');
   endImage=loadImage('assets/images/halloween.jpeg');
+  gameSound = loadSound('assets/sounds/hauntedhouse.mp3');
 }
 
 
@@ -69,6 +72,7 @@ function setup() {
   chicken = new Prey(100, 100, 8, color(255, 255, 255), 60, chickenImage);
   bee = new Prey(100, 100, 20, color(255, 255, 0), 10, beeImage);
   scoreBoard = new scoreboard(tiger.score, snake.score, wolf.score);
+  //add end and start page set ups
   startScreen=new screens (startImage, bottonX, bottonY, 100, 100, color(148,6,6),"Start Game!");
   endScreen=new screens (endImage, bottonX, bottonY, 100, 100, color(148,6,6),"Game Over!")
 
@@ -83,6 +87,8 @@ function draw() {
 
   // Clear the background to black
   background(safariImage);
+
+  gameSound.play();
 
   // Handle input for the tiger
   // give the 2 new predators handle input
@@ -123,13 +129,13 @@ function draw() {
   scoreBoard.display();
   //display gameover
    checkGameOver();
-// create an else for the start page to apear
+// display start page
 }
 else  if (playGame ==="S"){
 startScreen.display();
 
 }
-//add a gameover page
+//add a gameover page in diplay
 else  if (playGame ==="E"){
 endScreen.display();
 }
