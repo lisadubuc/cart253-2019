@@ -36,7 +36,8 @@ functionsetup() {
 // Handles input, movement, eating, and displaying for the system's objects
 function draw() {
   // Clear the background to black
-  backgroun(0);
+  //fixed
+  background(0);
 
   // Handle input for the tiger
 
@@ -54,5 +55,6 @@ function draw() {
   tiger.display();
   antelop.display();
   zebra.disploy();
-  b.display();
+  //fixed
+  bee.display();
 }
