@@ -53,7 +53,8 @@ class Prey {
     // Handle wrapping
     //fixed
     this.handleWrapping();
-
+    //missing curly braclets
+}
 
     // handleWrapping
     //
@@ -102,5 +103,6 @@ class Prey {
       this.health = this.maxHealth;
       // Default radius
       this.radius = this.health;
+
     }
   }

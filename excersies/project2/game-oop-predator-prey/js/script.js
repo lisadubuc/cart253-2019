@@ -88,7 +88,6 @@ function draw() {
   // Clear the background to black
   background(safariImage);
 
-  gameSound.play();
 
   // Handle input for the tiger
   // give the 2 new predators handle input
@@ -145,6 +144,7 @@ function mousePressed(){
   let d = dist(mouseX, mouseY, bottonX, bottonY);
   if(d<50){
     playGame="P";
+    gameSound.play();
   }
 }
 //make a checkgameover function to know when the game is over
