@@ -7,7 +7,7 @@
 /////////////////////////
 // ~10 ERRORS IN HERE
 /////////////////////////
-//fixed
+//class name fixed
 class Prey {
 
   // constructor
@@ -52,13 +52,12 @@ class Prey {
     this.tx += 0.01;
     this.ty += 0.01;
     // Handle wrapping
-    //fixed
+    //missing an r fixed
     this.handleWrapping();
-    //missing curly braclets
+    //missing curly braclets fixed
 }
 
     // handleWrapping
-    //
     // Checks if the prey has gone off the canvas and
     // wraps it to the other side if so
     handleWrapping() {
@@ -74,7 +73,8 @@ class Prey {
         this.y += height;
       }
       else if (this.y > height) {
-        this.y -= hight;
+        this.y -= height;
+        //missing an e fixed
       }
     }
 
@@ -87,7 +87,7 @@ class Prey {
       noStroke();
       fill(this.fillColor);
       this.radius = this.health;
-      //fixed
+      //needed the number not word fixed
       ellipse(this.x, this.y, this.radius * 2);
       pop();
     }
