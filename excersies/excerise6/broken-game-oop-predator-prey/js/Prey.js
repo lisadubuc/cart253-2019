@@ -14,7 +14,7 @@ class Prey {
   //
   // Sets the initial values for the Predator's properties
   // Either sets default values or uses the arguments provided
-  //fixed
+  //put (y) not why fixed
   constructor(x, y, speed, fillColor, radius) {
     // Position
     this.x = x;
@@ -22,11 +22,12 @@ class Prey {
     // Velocity and speed
     this.vx = 0;
     this.vy = 0;
-    //fixed
+    //missing an (e) fixed
     this.speed = speed;
     // Time properties for noise() function
-    this.tx = random(0, 0); // To make x and y noise different
-    this.ty = random(0, 0); // we use random starting values
+    this.tx = random(0, 1000); // To make x and y noise different
+    this.ty = random(0, 1000); // we use random starting values
+    //need to have a higher range than 0 fixed
     // Health properties
     this.maxHealth = radius;
     this.health = this.maxHealth; // Must be AFTER defining this.maxHealth
@@ -39,7 +40,7 @@ class Prey {
   //
   // Sets velocity based on the noise() function and the Prey's speed
   // Moves based on the resulting velocity and handles wrapping
-  //fixed
+  //change for e fixed
   move() {
     // Set velocity via noise()
     this.vx = map(noise(this.tx), 0, 1, -this.speed, this.speed);
