@@ -60,7 +60,8 @@ function draw() {
 
   // Display all the "animals"
   tiger.display();
-  antelop.display();
+  //add (e) fixed
+  antelope.display();
   zebra.display();
   //replaced the o by a fixed
   //put a b for bee fixed

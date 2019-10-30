@@ -14,8 +14,8 @@ class Predator {
   //
   // Sets the initial values for the Predator's properties
   // Either sets default values or uses the arguments provided
-  //fixed
-  construction(x, y, speed, fillColor, radius) {
+  //the syntax of constructor and fillcolor fixed
+  constructor(x, y, speed, fillColor, radius) {
     // Position
     this.x = x;
     this.y = y;
@@ -30,9 +30,10 @@ class Predator {
     this.healthGainPerEat = 1;
     // Display properties
     this.fillColor = fillColor;
-    this.radios = this.health; // Radius is defined in terms of health
+    // u instead of o fixed
+    this.radius = this.health; // Radius is defined in terms of health
     // Input properties
-    //fixed
+    //up instead of app fixed
     this.upKey = UP_ARROW;
     this.downKey = DOWN_ARROW;
     this.leftKey = LEFT_ARROW;
@@ -58,7 +59,8 @@ class Predator {
     if (keyIsDown(this.upKey)) {
       this.vy = -this.speed;
     }
-    else if (keyIsClown(this.downKey)) {
+    //down instead of clown fixed
+    else if (keyIsDown(this.downKey)) {
       this.vy = this.speed;
     }
     else {
@@ -67,7 +69,6 @@ class Predator {
   }
 
   // move
-  //
   // Updates the position according to velocity
   // Lowers health (as a cost of living)
   // Handles wrapping
@@ -83,7 +84,6 @@ class Predator {
   }
 
   // handleWrapping
-  //
   // Checks if the predator has gone off the canvas and
   // wraps it to the other side if so
   handleWrapping() {
@@ -104,13 +104,13 @@ class Predator {
   }
 
   // handleEating
-  //
   // Takes a Prey object as an argument and checks if the predator
   // overlaps it. If so, reduces the prey's health and increases
   // the predator's. If the prey dies, it gets reset.
   handleEating(prey) {
     // Calculate distance from this predator to the prey
-    let d = dist(thisX, thisY, prey.x, prey.y);
+    let d = dist(this.x, this.y, prey.x, prey.y);
+    //needed (.) for the this x,y fixed
     // Check if the distance is less than their two radii (an overlap)
     if (d < this.radius + prey.radius) {
       // Increase predator health and constrain it to its possible range
@@ -120,7 +120,8 @@ class Predator {
       prey.health -= this.healthGainPerEat;
       // Check if the prey died and reset it if so
       if (prey.health < 0) {
-        prey.rest();
+        prey.reset();
+        //missing e fixed
       }
     }
   }
@@ -130,13 +131,13 @@ class Predator {
   // Draw the predator as an ellipse on the canvas
   // with a radius the same size as its current health.
   display() {
-    //fixed
+    //needed u not i fixed
     push();
     noStroke();
     fill(this.fillColor);
     this.radius = this.health;
     ellipse(this.x, this.y, this.radius * 2);
-    //fixed
+    //needed o not i fixed
     pop();
   }
 }
