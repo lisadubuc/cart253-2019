@@ -14,8 +14,9 @@ class Predator {
   //
   // Sets the initial values for the Predator's properties
   // Either sets default values or uses the arguments provided
-  //the syntax of constructor and fillcolor fixed
   constructor(x, y, speed, fillColor, radius) {
+    ///needed or not ion fixed
+    ///misspelled fillcolor fixed
     // Position
     this.x = x;
     this.y = y;
@@ -30,11 +31,11 @@ class Predator {
     this.healthGainPerEat = 1;
     // Display properties
     this.fillColor = fillColor;
-    // u instead of o fixed
     this.radius = this.health; // Radius is defined in terms of health
+    ///not o but u fixed
     // Input properties
-    //up instead of app fixed
     this.upKey = UP_ARROW;
+    ///not app but up fixed
     this.downKey = DOWN_ARROW;
     this.leftKey = LEFT_ARROW;
     this.rightKey = RIGHT_ARROW;
@@ -48,34 +49,32 @@ class Predator {
     // Horizontal movement
     if (keyIsDown(this.leftKey)) {
       this.vx = -this.speed;
-    }
-    else if (keyIsDown(this.rightKey)) {
+    } else if (keyIsDown(this.rightKey)) {
       this.vx = this.speed;
-    }
-    else {
+    } else {
       this.vx = 0;
     }
     // Vertical movement
     if (keyIsDown(this.upKey)) {
       this.vy = -this.speed;
-    }
-    //down instead of clown fixed
-    else if (keyIsDown(this.downKey)) {
+    } else if (keyIsDown(this.downKey)) {
+      ///down not clown fixed
       this.vy = this.speed;
-    }
-    else {
+    } else {
       this.vy = 0;
     }
   }
 
   // move
+  //
   // Updates the position according to velocity
   // Lowers health (as a cost of living)
   // Handles wrapping
   move() {
     // Update position
-    this.x = this.vx;
-    this.y = this.vy;
+    this.x += this.vx;
+    this.y += this.vy;
+    /// missing the + with the = fixed
     // Update health
     this.health = this.health - this.healthLossPerMove;
     this.health = constrain(this.health, 0, this.maxHealth);
@@ -84,33 +83,33 @@ class Predator {
   }
 
   // handleWrapping
+  //
   // Checks if the predator has gone off the canvas and
   // wraps it to the other side if so
   handleWrapping() {
     // Off the left or right
     if (this.x < 0) {
       this.x += width;
-    }
-    else if (this.x > width) {
+    } else if (this.x > width) {
       this.x -= width;
     }
     // Off the top or bottom
     if (this.y < 0) {
       this.y += height;
-    }
-    else if (this.y > height) {
+    } else if (this.y > height) {
       this.y -= height;
     }
   }
 
   // handleEating
+  //
   // Takes a Prey object as an argument and checks if the predator
   // overlaps it. If so, reduces the prey's health and increases
   // the predator's. If the prey dies, it gets reset.
   handleEating(prey) {
     // Calculate distance from this predator to the prey
     let d = dist(this.x, this.y, prey.x, prey.y);
-    //needed (.) for the this x,y fixed
+    /// needed (.) for the this x,y fixed
     // Check if the distance is less than their two radii (an overlap)
     if (d < this.radius + prey.radius) {
       // Increase predator health and constrain it to its possible range
@@ -121,7 +120,7 @@ class Predator {
       // Check if the prey died and reset it if so
       if (prey.health < 0) {
         prey.reset();
-        //missing e fixed
+        ///missing an e fixed
       }
     }
   }
@@ -131,13 +130,13 @@ class Predator {
   // Draw the predator as an ellipse on the canvas
   // with a radius the same size as its current health.
   display() {
-    //needed u not i fixed
     push();
+    ///needed an u not a i fixed
     noStroke();
     fill(this.fillColor);
     this.radius = this.health;
     ellipse(this.x, this.y, this.radius * 2);
-    //needed o not i fixed
     pop();
+    ///needed an o not an i fixed
   }
 }
