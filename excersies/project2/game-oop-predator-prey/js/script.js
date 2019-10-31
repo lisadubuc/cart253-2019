@@ -39,8 +39,9 @@ let endScreen;
 let gameSound;
 //preload images
 
-//create empty group array
+//create empty groups arrays for prey and predator
 let predatorGroup =[];
+let preyGroup=[];
 
 function preload() {
   tigerImage = loadImage('assets/images/clown.png');
@@ -73,11 +74,10 @@ function setup() {
   predatorGroup[0] =  new Predator(100, 100, 5, color(200, 200, 0), 40, UP_ARROW, DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, tigerImage, SHIFT);
   predatorGroup[1] = new Predator(100, 100, 5, color(200, 100, 0), 40, 87, 83, 65, 63, snakeImage, 32);
   predatorGroup[2] = new Predator(100, 100, 5, color(100, 200, 0), 40, 85, 74, 72, 75, wolfImage, ENTER);
-
-
-  bunny = new Prey(100, 100, 10, color(255, 100, 10), 50, bunnyImage);
-  chicken = new Prey(100, 100, 8, color(255, 255, 255), 60, chickenImage);
-  bee = new Prey(100, 100, 20, color(255, 255, 0), 10, beeImage);
+  //put the preys in array group
+  preyGroup[0] =new Prey(100, 100, 10, color(255, 100, 10), 50, bunnyImage);
+  preyGroup[1] =new Prey(100, 100, 8, color(255, 255, 255), 60, chickenImage);
+  preyGroup[2] =new Prey(100, 100, 20, color(255, 255, 0), 10, beeImage);
   scoreBoard = new scoreboard(predatorGroup[0].score, predatorGroup[1].score, predatorGroup[2].score, "Clown", "Pumpkin", "Ghost");
   //add end and start page set ups
   startScreen = new screens(startImage, bottonX, bottonY, 100, 100, color('transparent'), "Start Game!", color(255, 0, 0));
@@ -100,24 +100,16 @@ function draw() {
     for(let i =0; i< predatorGroup.length; i++){
       predatorGroup[i].handleInput();
       predatorGroup[i].move();
-      predatorGroup[i].handleEating(chicken);
-      predatorGroup[i].handleEating(bunny);
-      predatorGroup[i].handleEating(bee);
+      predatorGroup[i].handleEating(preyGroup[0]);
+      predatorGroup[i].handleEating(preyGroup[1]);
+      predatorGroup[i].handleEating(preyGroup[2]);
       predatorGroup[i].display();
     }
-
-
-    // Move all the "animals"
-
-    bunny.move();
-    chicken.move();
-    bee.move();
-
-    // Display all the "animals"
-
-    chicken.display();
-    bunny.display();
-    bee.display();
+//put all needed for prey to excit
+  for(let i =0; i< preyGroup.length; i++){
+    preyGroup[i].move();
+    preyGroup[i].display();
+  }
 
     //put scoreboard in display
     //replace with the array group
