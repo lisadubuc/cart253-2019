@@ -4,25 +4,27 @@ class screens {
 
   // constructor
   //make scores for each predator
-  constructor(screenImage, tempBottonX, tempBottonY, bottonWidth, bottonHeight, bottonColor,screenText) {
+  constructor(screenImage, tempBottonX, tempBottonY, bottonWidth, bottonColor, bottonHeight, screenText, textColor) {
     this.screenImage = screenImage;
     this.bottonX = tempBottonX;
     this.bottonY = tempBottonY;
-    this.bottonWidth=bottonWidth;
-    this.bottonHeight=bottonHeight;
-    this.bottonColor=bottonColor;
-    this.screenText=screenText;
+    this.bottonWidth = bottonWidth;
+    this.bottonHeight = bottonHeight;
+    this.bottonColor = bottonColor;
+    this.screenText = screenText;
+    this.textColor = textColor
 
   }
   //make the diplay
-  display(){
+  display() {
     push();
     background(this.screenImage);
     rectMode(CENTER);
     fill(this.bottonColor);
-    rect(this.bottonX,this.bottonY,this.bottonWidth,this.bottonHeight);
-    fill(0);
-    text(this.screenText, this.bottonX-this.bottonWidth/2, this.bottonY);
+    textSize(30);
+    rect(this.bottonX, this.bottonY, this.bottonWidth, this.bottonHeight);
+    fill(this.textColor);
+    text(this.screenText, this.bottonX - this.bottonWidth / 2, this.bottonY);
     pop();
   }
 }
