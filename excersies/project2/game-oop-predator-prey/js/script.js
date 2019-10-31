@@ -6,25 +6,14 @@
 // The predator chases the prey using the arrow keys and consumes them.
 // The predator loses health over time, so they must keep eating to survive.
 
-// Our predator
-//create 2 new predators
-let tiger;
-let snake;
-let wolf;
-
-// The three prey
-let chicken;
-let bunny;
-let bee;
-
 // add variables for images
-let tigerImage;
-let snakeImage;
-let wolfImage;
-let chickenImage;
-let bunnyImage;
-let beeImage;
-let safariImage;
+let clownImage;
+let pumpkinImage;
+let ghostImage;
+let danceImage;
+let guardImage;
+let angelImage;
+let hauntedImage;
 //add variables to do start page
 let playGame;
 let buttonX;
@@ -40,17 +29,17 @@ let gameSound;
 //preload images
 
 //create empty groups arrays for prey and predator
-let predatorGroup =[];
-let preyGroup=[];
+let predatorGroup = [];
+let preyGroup = [];
 
 function preload() {
-  tigerImage = loadImage('assets/images/clown.png');
-  snakeImage = loadImage('assets/images/pumpkin.png');
-  wolfImage = loadImage('assets/images/ghost.png');
-  chickenImage = loadImage('assets/images/dance.png');
-  bunnyImage = loadImage('assets/images/guard.png');
-  beeImage = loadImage('assets/images/angel.png');
-  safariImage = loadImage('assets/images/haunted.jpg');
+  clownImage = loadImage('assets/images/clown.png');
+  pumpkinImage = loadImage('assets/images/pumpkin.png');
+  ghostImage = loadImage('assets/images/ghost.png');
+  danceImage = loadImage('assets/images/dance.png');
+  guardImage = loadImage('assets/images/guard.png');
+  angelImage = loadImage('assets/images/angel.png');
+  hauntedImage = loadImage('assets/images/haunted.jpg');
   startImage = loadImage('assets/images/cold.jpg');
   endImage = loadImage('assets/images/jackie.jpg');
   gameSound = loadSound('assets/sounds/hauntedhouse.mp3');
@@ -71,13 +60,13 @@ function setup() {
   bottonX = width / 2;
   bottonY = height / 2;
   //put the predators in array group
-  predatorGroup[0] =  new Predator(100, 100, 5, color(200, 200, 0), 40, UP_ARROW, DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, tigerImage, SHIFT);
-  predatorGroup[1] = new Predator(100, 100, 5, color(200, 100, 0), 40, 87, 83, 65, 63, snakeImage, 32);
-  predatorGroup[2] = new Predator(100, 100, 5, color(100, 200, 0), 40, 85, 74, 72, 75, wolfImage, ENTER);
-  //put the preys in array group
-  preyGroup[0] =new Prey(100, 100, 10, color(255, 100, 10), 50, bunnyImage);
-  preyGroup[1] =new Prey(100, 100, 8, color(255, 255, 255), 60, chickenImage);
-  preyGroup[2] =new Prey(100, 100, 20, color(255, 255, 0), 10, beeImage);
+  predatorGroup[0] = new Predator(100, 100, 5, color(200, 200, 0), 40, UP_ARROW, DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, clownImage, SHIFT);
+  predatorGroup[1] = new Predator(100, 100, 5, color(200, 100, 0), 40, 87, 83, 65, 63, pumpkinImage, 32);
+  predatorGroup[2] = new Predator(100, 100, 5, color(100, 200, 0), 40, 85, 74, 72, 75, ghostImage, ENTER);
+  //put the preys in array groups
+  preyGroup[0] = new Prey(100, 100, 10, color(255, 100, 10), 50, danceImage);
+  preyGroup[1] = new Prey(100, 100, 8, color(255, 255, 255), 60, guardImage);
+  preyGroup[2] = new Prey(100, 100, 20, color(255, 255, 0), 10, angelImage);
   scoreBoard = new scoreboard(predatorGroup[0].score, predatorGroup[1].score, predatorGroup[2].score, "Clown", "Pumpkin", "Ghost");
   //add end and start page set ups
   startScreen = new screens(startImage, bottonX, bottonY, 100, 100, color('transparent'), "Start Game!", color(255, 0, 0));
@@ -93,11 +82,11 @@ function draw() {
 
 
     // Clear the background to black
-    background(safariImage);
+    background(hauntedImage);
 
 
-  //put in all the things the predators need to do
-    for(let i =0; i< predatorGroup.length; i++){
+    //put in all the things the predators need to do
+    for (let i = 0; i < predatorGroup.length; i++) {
       predatorGroup[i].handleInput();
       predatorGroup[i].move();
       predatorGroup[i].handleEating(preyGroup[0]);
@@ -105,11 +94,11 @@ function draw() {
       predatorGroup[i].handleEating(preyGroup[2]);
       predatorGroup[i].display();
     }
-//put all needed for prey to excit
-  for(let i =0; i< preyGroup.length; i++){
-    preyGroup[i].move();
-    preyGroup[i].display();
-  }
+    //put all needed for prey to excit
+    for (let i = 0; i < preyGroup.length; i++) {
+      preyGroup[i].move();
+      preyGroup[i].display();
+    }
 
     //put scoreboard in display
     //replace with the array group
