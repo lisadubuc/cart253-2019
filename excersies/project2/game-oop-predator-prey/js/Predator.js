@@ -12,8 +12,7 @@ class Predator {
   // Sets the initial values for the Predator's properties
   // Either sets default values or uses the arguments provided
   //add key codes in
-  //add animal image
-  constructor(x, y, speed, fillColor, radius, upKey, downKey, leftKey, rightKey, animalImage, sprintKey) {
+  constructor(x, y, speed, fillColor, radius, upKey, downKey, leftKey, rightKey, halloweenImage, sprintKey) {
     // Position
     this.x = x;
     this.y = y;
@@ -39,7 +38,7 @@ class Predator {
     this.downKey = downKey;
     this.leftKey = leftKey;
     this.rightKey = rightKey;
-    this.animalImage = animalImage;
+    this.halloweenImage = halloweenImage;
     this.sprintKey = sprintKey;
     this.score = 0;
   }
@@ -142,7 +141,7 @@ class Predator {
     noStroke();
     fill(this.fillColor);
     this.radius = this.health;
-    image(this.animalImage, this.x, this.y, this.radius, this.radius);
+    image(this.halloweenImage, this.x, this.y, this.radius, this.radius);
     pop();
   }
 }

@@ -67,10 +67,10 @@ function setup() {
   preyGroup[0] = new Prey(100, 100, 10, color(255, 100, 10), 50, danceImage);
   preyGroup[1] = new Prey(100, 100, 8, color(255, 255, 255), 60, guardImage);
   preyGroup[2] = new Prey(100, 100, 20, color(255, 255, 0), 10, angelImage);
-  scoreBoard = new scoreboard(predatorGroup[0].score, predatorGroup[1].score, predatorGroup[2].score, "Clown", "Pumpkin", "Ghost");
+  scoreBoard = new ScoreBoard(predatorGroup[0].score, predatorGroup[1].score, predatorGroup[2].score, "Clown", "Pumpkin", "Ghost");
   //add end and start page set ups
-  startScreen = new screens(startImage, bottonX, bottonY, 100, 100, color('transparent'), "Start Game!", color(255, 0, 0));
-  endScreen = new screens(endImage, bottonX, bottonY, 100, 100, color('transparent'), "Game Over!", color(255, 0, 0))
+  startScreen = new Screens(startImage, bottonX, bottonY, 100, 100, color('transparent'), "Start Game!", color(255, 0, 0));
+  endScreen = new Screens(endImage, bottonX, bottonY, 100, 100, color('transparent'), "Game Over!", color(255, 0, 0))
 
 }
 
@@ -81,7 +81,7 @@ function draw() {
   if (playGame === "P") {
 
 
-    // Clear the background to black
+    //put backcground image
     background(hauntedImage);
 
 
@@ -93,11 +93,13 @@ function draw() {
       predatorGroup[i].handleEating(preyGroup[1]);
       predatorGroup[i].handleEating(preyGroup[2]);
       predatorGroup[i].display();
+
     }
     //put all needed for prey to excit
     for (let i = 0; i < preyGroup.length; i++) {
       preyGroup[i].move();
       preyGroup[i].display();
+
     }
 
     //put scoreboard in display
@@ -110,10 +112,12 @@ function draw() {
   } else if (playGame === "S") {
     startScreen.display();
 
+
   }
   //add a gameover page in diplay
   else if (playGame === "E") {
     endScreen.display();
+
   }
 }
 //create mouse press function to have a botton to press to start
@@ -121,7 +125,8 @@ function mousePressed() {
   let d = dist(mouseX, mouseY, bottonX, bottonY);
   if (d < 50) {
     playGame = "P";
-    gameSound.play();
+  //put the sound on loop 
+    gameSound.loop();
   }
 }
 //make a checkgameover function to know when the game is over

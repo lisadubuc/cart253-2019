@@ -1,5 +1,5 @@
 //add class for screens (start and end)
-class screens {
+class Screens {
 
 
   // constructor

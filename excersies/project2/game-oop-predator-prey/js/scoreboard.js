@@ -1,5 +1,5 @@
 //add scoreboard class
-class scoreboard {
+class ScoreBoard {
 
 
   // constructor
