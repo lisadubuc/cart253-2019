@@ -40,7 +40,7 @@ let enemyImage
 let carImage
 let raceImage
 let trackImage
-let trackImageX=0;
+let trackImageX = 0;
 
 //preload images
 function preload() {
@@ -66,8 +66,8 @@ function setup() {
   // Put the enemy to the left at a random y coordinate within the canvas
   enemyX = 0;
   enemyY = random(0, height);
-  enemy2= random(0,height);
-  enemy3= random(0,height);
+  enemy2 = random(0, height);
+  enemy3 = random(0, height);
 
   // No stroke so it looks cleaner
   noStroke();
@@ -81,13 +81,12 @@ function draw() {
   // put image as background
   //background(trackImage);
   background(0);
-  image(trackImage,trackImageX,0,width,height);
-  image(trackImage,trackImageX-width,0,width,height);
-  if(trackImageX<(width)){
-      trackImageX=trackImageX + 5;
-  }
-  else {
-    trackImageX=0;
+  image(trackImage, trackImageX, 0, width, height);
+  image(trackImage, trackImageX - width, 0, width, height);
+  if (trackImageX < (width)) {
+    trackImageX = trackImageX + 10;
+  } else {
+    trackImageX = 0;
   }
 
 
@@ -132,8 +131,7 @@ function draw() {
     // Reset the dodge counter
     dodges = 0;
     // add reset for size and speed of enemy
-    enemySpeed = random(5,12);
-    //enemySize= random(30,40);
+    enemySpeed = random(5, 12);
   }
 
   if (dist(enemyX, enemy2, avatarX, avatarY) < enemySize / 2 + avatarSize / 2) {
@@ -148,8 +146,7 @@ function draw() {
     // Reset the dodge counter
     dodges = 0;
     // add reset for size and speed of enemy
-    enemySpeed = random(5,12);
-    //enemySize= random(30,40);
+    enemySpeed = random(5, 12);
   }
 
   if (dist(enemyX, enemy3, avatarX, avatarY) < enemySize / 2 + avatarSize / 2) {
@@ -164,8 +161,7 @@ function draw() {
     // Reset the dodge counter
     dodges = 0;
     // add reset for size and speed of enemy
-    enemySpeed = random(5,12);
-    //enemySize= random(30,40);
+    enemySpeed = random(5, 12);
   }
 
   // Check if the avatar has gone off the screen (cheating!)
@@ -188,10 +184,8 @@ function draw() {
     // Reset the enemy's position to the left at a random height
     enemyX = width;
     enemyY = random(0, height);
-    enemy2=random(0,height);
-    enemy3=random(0,height);
-    //add enemy size and speed increase
-    //enemySize = enemySize + 10;
+    enemy2 = random(0, height);
+    enemy3 = random(0, height);
     enemySpeed = enemySpeed + 1;
   }
 
