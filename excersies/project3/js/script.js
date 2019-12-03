@@ -37,10 +37,10 @@ let explotionImage;
 let trackImageX = 0;
 
 //track speed variable
-let trackSpeed =10;
+let trackSpeed = 10;
 
 //start game variable
-let startGame =false;
+let startGame = false;
 
 //start screen variable
 let startScreen;
@@ -49,7 +49,7 @@ let startScreen;
 let gameSound;
 
 //array variable
-let enemys=[];
+let enemys = [];
 
 //explosion variable
 let explosion;
@@ -63,8 +63,8 @@ function preload() {
   raceImage = loadImage('assets/images/car4.png');
   trackImage = loadImage('assets/images/track1.jpg');
   gameSound = loadSound('assets/sounds/racing.mp3');
-  startImage= loadImage('assets/images/startscreen.jpg')
-  explotionImage= loadImage('assets/images/boom.png')
+  startImage = loadImage('assets/images/startscreen.jpg')
+  explotionImage = loadImage('assets/images/boom.png')
 
 }
 
@@ -83,11 +83,11 @@ function setup() {
   bottonY = height / 2;
 
   //add classes and arrays
-  enemys[0]=new Enemy(enemyImageTemp,0,random(0, height),random(5,12),90);
-  enemys[1]=new Enemy(carImage,0,random(0, height),random(5,12),90);
-  enemys[2]=new Enemy(raceImage,0,random(0, height),random(5,12),90);
+  enemys[0] = new Enemy(enemyImageTemp, 0, random(0, height), random(5, 12), 90);
+  enemys[1] = new Enemy(carImage, 0, random(0, height), random(5, 12), 90);
+  enemys[2] = new Enemy(raceImage, 0, random(0, height), random(5, 12), 90);
   startScreen = new Screens(startImage, bottonX, bottonY, 100, 100, color('transparent'), "START RACING!", color(3, 161, 252));
- explosion=new StarExplosion(explotionImage,0);
+  explosion = new StarExplosion(explotionImage, 0);
 
 
   // No stroke so it looks cleaner
@@ -97,18 +97,17 @@ function setup() {
 // draw
 function draw() {
   //start game function to have start screen and game
-  if(startGame ===true){
-      playGame();
+  if (startGame === true) {
+    playGame();
 
- }
-  else{
-   startScreen.display();
+  } else {
+    startScreen.display();
   }
 
 
 }
 //to have continues track
-function playGame(){
+function playGame() {
   background(0);
   image(trackImage, trackImageX, 0, width, height);
   image(trackImage, trackImageX - width, 0, width, height);
@@ -137,18 +136,18 @@ function playGame(){
   }
 
   // Move the avatar according to its calculated velocity
-  if(enemys[0].collided===false && enemys[1].collided===false && enemys[2].collided===false){
-  avatarX = avatarX + avatarVX;
-  avatarY = avatarY + avatarVY;
+  if (enemys[0].collided === false && enemys[1].collided === false && enemys[2].collided === false) {
+    avatarX = avatarX + avatarVX;
+    avatarY = avatarY + avatarVY;
   }
-//display all what enemy needs
-  for(let i=0;i<enemys.length;i++){
+  //display all what enemy needs
+  for (let i = 0; i < enemys.length; i++) {
     enemys[i].update();
-enemys[i].collision(avatarX,avatarY,avatarSize);
-enemys[i].resetAfterCollision();
-enemys[i].reset();
-enemys[i].display();
-}
+    enemys[i].collision(avatarX, avatarY, avatarSize);
+    enemys[i].resetAfterCollision();
+    enemys[i].reset();
+    enemys[i].display();
+  }
 
 
 
@@ -180,7 +179,7 @@ function mousePressed() {
   let d = dist(mouseX, mouseY, bottonX, bottonY);
   if (d < 50) {
     startGame = true;
-  //put the sound on loop
+    //put the sound on loop
     gameSound.loop();
   }
 }
