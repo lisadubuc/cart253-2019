@@ -1,62 +1,77 @@
 /******************************************************
 
-Game - racetrack (prototype)
+Game - racetrack
 Lisa Dubuc
 
-this prototype is showing that it is a race game the speed of your car
-will go up collecting fuel each time you make a lap you get a point
-you lose if you hit another car or if you miss fuel
-will try to make an option for 1 player or two
+This is a neverending race game where you do laps and try not to
+collide in enemy cars to have the highest amount of laps.
 
 ******************************************************/
 
-// The position and size of our avatar circle
+// avatar size and position
 let avatarX;
 let avatarY;
 let avatarSize = 100;
 
-// The speed and velocity of our avatar circle
+// The speed and velocity of avatar
 let avatarSpeed = 10;
 let avatarVX = 0;
 let avatarVY = 0;
 
-// The position and size of the enemy circle
-let enemyX;
-let enemyY;
-let enemy2;
-let enemy3;
-let enemySize = 90;
+//the start button
+let buttonX;
+let buttonY;
 
-// The speed and velocity of our enemy circle
-let enemySpeed = 5;
-let enemyVX = -5;
 
 // How many dodges the player has made
 let dodges = 0;
 
-//add immage variables
+//add image variables
 let avatarImage
-let enemyImage
+let enemyImageTemp
 let carImage
 let raceImage
 let trackImage
+let startImage;
+let explotionImage;
 let trackImageX = 0;
+
+//track speed variable
 let trackSpeed =10;
 
-//preload images
+//start game variable
+let startGame =false;
+
+//start screen variable
+let startScreen;
+
+//sound variable
+let gameSound;
+
+//array variable
+let enemys=[];
+
+//explosion variable
+let explosion;
+
+
+//preload images and sound
 function preload() {
   avatarImage = loadImage('assets/images/car3.png');
-  enemyImage = loadImage('assets/images/car1.png');
+  enemyImageTemp = loadImage('assets/images/car1.png');
   carImage = loadImage('assets/images/car2.png');
   raceImage = loadImage('assets/images/car4.png');
   trackImage = loadImage('assets/images/track1.jpg');
+  gameSound = loadSound('assets/sounds/racing.mp3');
+  startImage= loadImage('assets/images/startscreen.jpg')
+  explotionImage= loadImage('assets/images/boom.png')
 
 }
 
 
 // setup()
 //
-// Make the canvas, position the avatar and anemy
+// Make the canvas, position the avatar and enemys
 function setup() {
   // Create our playing area
   createCanvas(1440, 716);
@@ -64,23 +79,36 @@ function setup() {
   avatarX = width / 2;
   avatarY = height / 2;
 
-  // Put the enemy to the left at a random y coordinate within the canvas
-  enemyX = 0;
-  enemyY = random(0, height);
-  enemy2 = random(0, height);
-  enemy3 = random(0, height);
+  bottonX = width / 2.2;
+  bottonY = height / 2;
+
+  //add classes and arrays
+  enemys[0]=new Enemy(enemyImageTemp,0,random(0, height),random(5,12),90);
+  enemys[1]=new Enemy(carImage,0,random(0, height),random(5,12),90);
+  enemys[2]=new Enemy(raceImage,0,random(0, height),random(5,12),90);
+  startScreen = new Screens(startImage, bottonX, bottonY, 100, 100, color('transparent'), "START RACING!", color(3, 161, 252));
+ explosion=new StarExplosion(explotionImage,0);
+
 
   // No stroke so it looks cleaner
   noStroke();
 }
 
-// draw()
-//
-// Handle moving the avatar and enemy and checking for dodges and
-// game over situations.
+// draw
 function draw() {
-  // put image as background
-  //background(trackImage);
+  //start game function to have start screen and game
+  if(startGame ===true){
+      playGame();
+
+ }
+  else{
+   startScreen.display();
+  }
+
+
+}
+//to have continues track
+function playGame(){
   background(0);
   image(trackImage, trackImageX, 0, width, height);
   image(trackImage, trackImageX - width, 0, width, height);
@@ -109,105 +137,50 @@ function draw() {
   }
 
   // Move the avatar according to its calculated velocity
+  if(enemys[0].collided===false && enemys[1].collided===false && enemys[2].collided===false){
   avatarX = avatarX + avatarVX;
   avatarY = avatarY + avatarVY;
-
-  // The enemy always moves at enemySpeed
-  enemyVX = -enemySpeed;
-  // Update the enemy's position based on its velocity
-  enemyX = enemyX + enemyVX;
-
-  // Check if the enemy and avatar overlap - if they do the player loses
-  // We do this by checking if the distance between the centre of the enemy
-  // and the centre of the avatar is less that their combined radii
-  if (dist(enemyX, enemyY, avatarX, avatarY) < enemySize / 2 + avatarSize / 2) {
-    // Tell the player they lost
-    console.log("YOU LOSE!");
-    // Reset the enemy's position
-    enemyX = 0;
-    enemyY = random(0, height);
-    // Reset the avatar's position
-    avatarX = width / 2;
-    avatarY = height / 2;
-    // Reset the dodge counter
-    dodges = 0;
-    // add reset for size and speed of enemy
-    enemySpeed = random(5, 12);
-    trackSpeed=10;
   }
+//display all what enemy needs
+  for(let i=0;i<enemys.length;i++){
+    enemys[i].update();
+enemys[i].collision(avatarX,avatarY,avatarSize);
+enemys[i].resetAfterCollision();
+enemys[i].reset();
+enemys[i].display();
+}
 
-  if (dist(enemyX, enemy2, avatarX, avatarY) < enemySize / 2 + avatarSize / 2) {
-    // Tell the player they lost
-    console.log("YOU LOSE!");
-    // Reset the enemy's position
-    enemyX = 0;
-    enemy2 = random(0, height);
-    // Reset the avatar's position
-    avatarX = width / 2;
-    avatarY = height / 2;
-    // Reset the dodge counter
-    dodges = 0;
-    // add reset for size and speed of enemy
-    enemySpeed = random(5, 12);
-    trackSpeed=10;
 
-  }
-
-  if (dist(enemyX, enemy3, avatarX, avatarY) < enemySize / 2 + avatarSize / 2) {
-    // Tell the player they lost
-    console.log("YOU LOSE!");
-    // Reset the enemy's position
-    enemyX = 0;
-    enemy3 = random(0, height);
-    // Reset the avatar's position
-    avatarX = width / 2;
-    avatarY = height / 2;
-    // Reset the dodge counter
-    dodges = 0;
-    // add reset for size and speed of enemy
-    enemySpeed = random(5, 12);
-    trackSpeed=10;
-  }
 
   // Check if the avatar has gone off the screen (cheating!)
   if (avatarX < 0 || avatarX > width || avatarY < 0 || avatarY > height) {
     // If they went off the screen they lose in the same way as above.
     console.log("YOU LOSE!");
-    enemyX = 0;
-    enemyY = random(0, height);
     avatarX = width / 2;
     avatarY = height / 2;
     dodges = 0;
   }
 
-  // Check if the enemy has moved all the way across the screen
-  if (enemyX < 0) {
-    // This means the player dodged so update its dodge statistic
-    dodges = dodges + 1;
-    // Tell them how many dodges they have made
-    console.log(dodges + " DODGES!");
-    // Reset the enemy's position to the left at a random height
-    enemyX = width;
-    enemyY = random(0, height);
-    enemy2 = random(0, height);
-    enemy3 = random(0, height);
-    enemySpeed = enemySpeed + 1;
-    trackSpeed +=5;
-  }
 
 
 
   //add avatar image
   image(avatarImage, avatarX, avatarY, avatarSize, avatarSize);
-  //add enemy images
-  image(enemyImage, enemyX, enemyY, enemySize, enemySize);
-  image(carImage, enemyX, enemy2, enemySize, enemySize);
-  image(raceImage, enemyX, enemy3, enemySize, enemySize);
+
+
   // display the number of dodges
   textAlign(RIGHT, TOP);
   textSize(64);
-  fill(0);
+  fill(3, 161, 252);
   text(dodges, width, 0);
 
-
+}
+//for the button to be pressed
+function mousePressed() {
+  let d = dist(mouseX, mouseY, bottonX, bottonY);
+  if (d < 50) {
+    startGame = true;
+  //put the sound on loop
+    gameSound.loop();
+  }
 }
