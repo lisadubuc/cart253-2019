@@ -37,7 +37,7 @@ class Enemy {
   resetAfterCollision() {
     // Reset the enemy's position
     if (this.collided == true) {
-
+      explosion.update();
       explosion.display();
       this.timePassed = millis() - this.startTime;
 
@@ -53,6 +53,8 @@ class Enemy {
         this.enemySpeed = random(5, 12);
         trackSpeed = 10;
         this.collided = false;
+        explosion.sizeX = 50;
+        explosion.sizeY = 50;
 
       }
     }
